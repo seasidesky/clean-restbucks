@@ -11,7 +11,6 @@ plugins {
 }
 
 dependencies {
-    compile project(":app-api")
-    compile "org.springframework:spring-webmvc:5.0.4.RELEASE"
-    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.4"
+    compile project(":domain")
+    compile "org.springframework:spring-context:5.0.4.RELEASE"
 }
