@@ -5,7 +5,15 @@
  * No technical frameworks allowed here!
  */
 
+plugins {
+    id "org.jetbrains.kotlin.plugin.allopen" version "1.2.21"
+}
+
 dependencies {
     compile project(":app-api")
     compile project(":domain")
+}
+
+allOpen {
+    annotation("be.sourcedbvba.restbucks.usecase.UseCase")
 }

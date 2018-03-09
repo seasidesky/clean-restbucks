@@ -1,0 +1,19 @@
+/*
+ * Web infrastructure
+ * ==================
+ * Technical framework dependencies allowed here (Spring)
+ * Dependencies should be about exposing your system
+ * to the outside world (no persistence frameworks!)
+ */
+
+plugins {
+    id "org.jetbrains.kotlin.plugin.spring" version "1.2.21"
+}
+
+dependencies {
+    compile project(":app-api")
+    compile "org.springframework.boot:spring-boot-starter-aop:2.0.0.RELEASE"
+    compile "org.hibernate.validator:hibernate-validator:6.0.7.Final"
+    compile 'javax.el:javax.el-api:3.0.0'
+    runtime 'org.glassfish:javax.el:3.0.1-b08'
+}
