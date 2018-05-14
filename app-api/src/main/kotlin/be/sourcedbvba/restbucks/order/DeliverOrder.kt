@@ -1,4 +1,4 @@
-package be.sourcedbvba.restbucks.usecase
+package be.sourcedbvba.restbucks.order
 
 interface DeliverOrder {
     fun deliver(request: DeliverOrderRequest)

@@ -1,6 +1,6 @@
-package be.sourcedbvba.restbucks.domain.gateway
+package be.sourcedbvba.restbucks.order.gateway
 
-import be.sourcedbvba.restbucks.domain.Order
+import be.sourcedbvba.restbucks.order.Order
 
 interface OrderGateway {
     fun getOrders() : List<Order>

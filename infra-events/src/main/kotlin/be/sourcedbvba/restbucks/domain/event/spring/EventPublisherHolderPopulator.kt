@@ -5,7 +5,7 @@ import org.springframework.beans.factory.InitializingBean
 import org.springframework.stereotype.Component
 
 @Component
-class EventPublisherHolderPopulator(private val eventPublisher: EventPublisher) : InitializingBean  {
+internal class EventPublisherHolderPopulator(private val eventPublisher: EventPublisher) : InitializingBean  {
     override fun afterPropertiesSet() {
         EventPublisher.Locator.eventPublisher = eventPublisher
     }
