@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 import kotlin.reflect.KClass
 
 @Component
-class SpringDomainEventConsumerRegistrar(val applicationEventMulticaster: ApplicationEventMulticaster,
+internal class SpringDomainEventConsumerRegistrar(val applicationEventMulticaster: ApplicationEventMulticaster,
                                          val eventConsumers: List<DomainEventConsumer<*>>) : InitializingBean {
     override fun afterPropertiesSet() {
         eventConsumers.forEach(this::registerEventConsumer)

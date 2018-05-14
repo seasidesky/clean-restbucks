@@ -1,4 +1,4 @@
-package be.sourcedbvba.restbucks.usecase
+package be.sourcedbvba.restbucks.order
 
 import be.sourcedbvba.restbucks.Milk
 import be.sourcedbvba.restbucks.Size

@@ -1,5 +1,6 @@
-package be.sourcedbvba.restbucks
+package be.sourcedbvba.restbucks.order
 
+import be.sourcedbvba.restbucks.order.*
 import be.sourcedbvba.restbucks.usecase.*
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -7,7 +8,7 @@ import java.math.BigDecimal
 
 @RequestMapping("/order")
 @RestController
-class OrderResource(val createOrder: CreateOrder,
+internal class OrderResource(val createOrder: CreateOrder,
                     val getOrders: GetOrders,
                     val getOrderStatus: GetOrderStatus,
                     val deleteOrder: DeleteOrder,

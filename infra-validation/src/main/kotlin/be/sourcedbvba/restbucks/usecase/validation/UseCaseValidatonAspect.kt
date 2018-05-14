@@ -8,7 +8,7 @@ import javax.validation.ConstraintViolationException
 import javax.validation.Validator
 
 @Aspect
-class UseCaseValidatonAspect(val validator: Validator) {
+internal class UseCaseValidatonAspect(val validator: Validator) {
 
     @Pointcut("within(@be.sourcedbvba.restbucks.usecase.UseCase *)")
     fun useCase() {

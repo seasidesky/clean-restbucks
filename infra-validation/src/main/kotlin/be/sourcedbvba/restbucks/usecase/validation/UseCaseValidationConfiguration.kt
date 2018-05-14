@@ -7,7 +7,7 @@ import javax.validation.Validator
 
 @Configuration
 @EnableAspectJAutoProxy
-class UseCaseValidationConfiguration {
+internal class UseCaseValidationConfiguration {
     @Bean
     fun useCaseValidationAspect(validator: Validator) = UseCaseValidatonAspect(validator)
 }
