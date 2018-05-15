@@ -5,7 +5,7 @@ import be.sourcedbvba.restbucks.Size
 import java.math.BigDecimal
 
 interface CreateOrder {
-    fun <T> create(request: CreateOrderRequest, presenter: (CreateOrderResponse) -> T) : T 
+    fun <T> create(request: CreateOrderRequest, presenter: (CreateOrderResponse) -> T) : T
 }
 
 data class CreateOrderRequest(val customer: String, val items: List<CreateOrderRequestItem>)
