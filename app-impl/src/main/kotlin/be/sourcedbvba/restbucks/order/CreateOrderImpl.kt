@@ -14,14 +14,14 @@ internal class CreateOrderImpl : CreateOrder {
 
     private fun CreateOrderRequest.toOrder() : Order {
         val id = UUID.randomUUID().toString()
-        return Order.build(id, customer, Status.OPEN, items.map { it.toOrderItem() })
+        return Order(id, customer, Status.OPEN, items.map { it.toOrderItem() })
     }
 
     private fun CreateOrderRequestItem.toOrderItem(): OrderItem {
-        return OrderItem.build(product, quantity, size, milk)
+        return OrderItem(product, quantity, size, milk)
     }
 
     private fun Order.toResponse() : CreateOrderResponse {
-        return CreateOrderResponse(getId(), getCustomer(), getCost())
+        return CreateOrderResponse(id, customer, cost)
     }
 }

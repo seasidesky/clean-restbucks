@@ -1,11 +1,10 @@
 package be.sourcedbvba.restbucks.order.event
 
-import be.sourcedbvba.restbucks.order.Order
-import be.sourcedbvba.restbucks.order.OrderItem
 import be.sourcedbvba.restbucks.domain.event.DomainEventConsumer
+import be.sourcedbvba.restbucks.order.*
 import be.sourcedbvba.restbucks.order.gateway.OrderJpaRepository
-import be.sourcedbvba.restbucks.order.OrderEntity
-import be.sourcedbvba.restbucks.order.OrderItemEntity
+import com.sun.org.apache.xml.internal.serializer.Version.getProduct
+import org.hibernate.engine.transaction.internal.jta.JtaStatusHelper.getStatus
 import org.springframework.stereotype.Component
 
 @Component
@@ -15,11 +14,11 @@ internal class OrderCreatedConsumer internal constructor(private val orderJpaRep
         orderJpaRepository.save(orderEntity)
     }
 
-    internal fun Order.toJpa() : OrderEntity {
-        return OrderEntity(getId(), getCustomer(), getStatus(), getCost(), getItems().map { it.toJpa() })
+    internal fun OrderState.toJpa() : OrderEntity {
+        return OrderEntity(id, customer, status, cost, items.map { it.toJpa() })
     }
 
-    internal fun OrderItem.toJpa() : OrderItemEntity {
-        return OrderItemEntity(null, getProduct(), getQuantity(), getSize(), getMilk())
+    internal fun OrderItemState.toJpa() : OrderItemEntity {
+        return OrderItemEntity(null, product, quantity, size, milk)
     }
 }
