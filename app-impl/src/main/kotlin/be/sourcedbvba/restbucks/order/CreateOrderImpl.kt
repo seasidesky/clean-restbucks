@@ -2,14 +2,17 @@ package be.sourcedbvba.restbucks.order
 
 import be.sourcedbvba.restbucks.Status
 import be.sourcedbvba.restbucks.usecase.UseCase
+import reactor.core.publisher.Mono
 import java.util.*
 
 @UseCase
 internal class CreateOrderImpl : CreateOrder {
-    override fun <T> create(request: CreateOrderRequest, presenter: (CreateOrderResponse) -> T): T {
-        val order = request.toOrder()
-        order.create()
-        return presenter(order.toResponse())
+    override fun <T> create(request: Mono<CreateOrderRequest>, presenter: (CreateOrderResponse) -> T): Mono<T> {
+        return request.map {
+            var order = it.toOrder()
+            order.create();
+            presenter(order.toResponse())
+        }
     }
 
     private fun CreateOrderRequest.toOrder() : Order {

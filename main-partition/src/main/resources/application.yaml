@@ -3,4 +3,13 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: create
-    open-in-view: false
+  datasource:
+    hikari:
+      maximum-pool-size: 5
+#    open-in-view: false
+
+management:
+  endpoint:
+    web:
+      exposure:
+        include: info,health

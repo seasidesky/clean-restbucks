@@ -7,4 +7,6 @@
 
 dependencies {
     compile project(":shared-vocabulary")
+
+    compile "io.projectreactor:reactor-core:3.1.5.RELEASE"
 }

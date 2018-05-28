@@ -4,16 +4,22 @@ import be.sourcedbvba.restbucks.order.Order
 import be.sourcedbvba.restbucks.order.OrderItem
 import be.sourcedbvba.restbucks.order.OrderEntity
 import be.sourcedbvba.restbucks.order.OrderItemEntity
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Component
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
+import reactor.core.scheduler.Scheduler
 
 @Component
-internal class JpaOrderGateway internal constructor(private val orderJpaRepository: OrderJpaRepository) : OrderGateway {
-    override fun getOrder(orderId: String): Order {
-        return orderJpaRepository.getOne(orderId).toDomain()
+internal class JpaOrderGateway internal constructor(private val orderJpaRepository: OrderJpaRepository, @Qualifier("jpa") private val scheduler: Scheduler) : OrderGateway {
+    override fun getOrder(orderId: String): Mono<Order> {
+        return Mono.just(orderJpaRepository.getOne(orderId).toDomain())
     }
 
-    override fun getOrders(): List<Order> {
-        return orderJpaRepository.findAll().map { it.toDomain() }
+    override fun getOrders(): Flux<Order> {
+        return Mono.fromCallable { orderJpaRepository.findAll().map { it.toDomain() } }
+                .publishOn(scheduler)
+                .flatMapIterable { it }
     }
 
     internal fun OrderEntity.toDomain() : Order {

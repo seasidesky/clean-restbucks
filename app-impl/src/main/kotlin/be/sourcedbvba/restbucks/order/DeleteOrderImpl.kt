@@ -7,6 +7,6 @@ import be.sourcedbvba.restbucks.usecase.UseCase
 internal class DeleteOrderImpl(private val orderGateway: OrderGateway) : DeleteOrder {
     override fun delete(request: DeleteOrderRequest) {
         val order = orderGateway.getOrder(request.orderId)
-        order.delete()
+        order.subscribe { it.delete() }
     }
 }

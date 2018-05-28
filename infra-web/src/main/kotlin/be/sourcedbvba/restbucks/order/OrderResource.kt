@@ -1,9 +1,9 @@
 package be.sourcedbvba.restbucks.order
 
-import be.sourcedbvba.restbucks.order.*
-import be.sourcedbvba.restbucks.usecase.*
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 import java.math.BigDecimal
 
 @RequestMapping("/order")
@@ -17,21 +17,19 @@ internal class OrderResource(val createOrder: CreateOrder,
 
     @PostMapping(produces = arrayOf("application/hal+json"))
     @ResponseStatus(HttpStatus.CREATED)
-    fun createOrder(@RequestBody createOrderRequest: CreateOrderRequest) : CreateOrderResponseBody {
+    fun createOrder(@RequestBody createOrderRequest: Mono<CreateOrderRequest>) : Mono<CreateOrderResponseBody> {
         return createOrder.create(createOrderRequest) {
             it.toResponseBody()
         }
     }
 
     @GetMapping
-    fun getOrders() : List<GetOrdersResponseBody> {
-        return getOrders.getOrders() {
-            it.map { it.toResponseBody() }
-        }
+    fun getOrders() : Flux<GetOrdersResponseBody> {
+        return getOrders.getOrders {it.toResponseBody()}
     }
 
     @GetMapping("/{orderId}/status")
-    fun getOrderStatus(@PathVariable orderId: String): String {
+    fun getOrderStatus(@PathVariable orderId: String): Mono<String> {
         return getOrderStatus.getStatus(GetOrderStatusRequest(orderId)) {
             it.status.name.toLowerCase()
         }

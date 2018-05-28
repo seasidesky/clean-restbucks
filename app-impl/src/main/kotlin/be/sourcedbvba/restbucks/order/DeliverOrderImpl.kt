@@ -7,6 +7,6 @@ import be.sourcedbvba.restbucks.usecase.UseCase
 internal class DeliverOrderImpl(val orderGateway: OrderGateway) : DeliverOrder {
     override fun deliver(request: DeliverOrderRequest) {
         val order = orderGateway.getOrder(request.orderId)
-        order.deliver()
+        order.subscribe { it.deliver() }
     }
 }

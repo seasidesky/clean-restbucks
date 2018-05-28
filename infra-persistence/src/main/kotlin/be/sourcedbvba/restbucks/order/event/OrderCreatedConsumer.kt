@@ -3,8 +3,6 @@ package be.sourcedbvba.restbucks.order.event
 import be.sourcedbvba.restbucks.domain.event.DomainEventConsumer
 import be.sourcedbvba.restbucks.order.*
 import be.sourcedbvba.restbucks.order.gateway.OrderJpaRepository
-import com.sun.org.apache.xml.internal.serializer.Version.getProduct
-import org.hibernate.engine.transaction.internal.jta.JtaStatusHelper.getStatus
 import org.springframework.stereotype.Component
 
 @Component
